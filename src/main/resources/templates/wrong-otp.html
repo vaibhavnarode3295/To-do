@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>OTP Not Found | To-Do App</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+        background: linear-gradient(135deg, #eef2f7, #e3f2fd);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .card-box {
+        background: white;
+        width: 420px;
+        padding: 35px;
+        border-radius: 16px;
+        box-shadow: 0px 10px 25px rgba(0,0,0,0.10);
+        text-align: center;
+    }
+
+    .title {
+        font-size: 26px;
+        font-weight: 700;
+        color: #4a4e69;
+    }
+
+    .message {
+        font-size: 15px;
+        color: #6c757d;
+        margin-top: 10px;
+        margin-bottom: 25px;
+    }
+
+    .btn-main {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 16px;
+        margin-bottom: 10px;
+        transition: 0.3s;
+        font-weight: 600;
+    }
+
+    .btn-retry {
+        background: #6c5ce7;
+        color: white;
+    }
+
+    .btn-retry:hover {
+        background: #5948d4;
+    }
+
+    .btn-login {
+        background: #81ecec;
+        color: #2d3436;
+    }
+
+    .btn-login:hover {
+        background: #74d9d9;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card-box">
+
+  <h2 class="title">OTP Not Found</h2>
+
+  <p class="message">
+    It looks like your OTP has expired or is not available.<br>
+    Please request a new one to continue.
+  </p>
+
+  <!-- Retry OTP -->
+  <a th:href="@{/resend-otp}">
+    <button class="btn-main btn-retry">Resend OTP</button>
+  </a>
+
+  <!-- Back to Login -->
+  <a th:href="@{/login}">
+    <button class="btn-main btn-login">Back to Login</button>
+  </a>
+
+</div>
+
+</body>
+</html>

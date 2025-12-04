@@ -1,0 +1,270 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Last 7 Days Tasks</title>-->
+
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">-->
+
+<!--    <style>-->
+<!--        body {-->
+<!--            background: #f5f7fa;-->
+<!--            font-family: "Segoe UI", sans-serif;-->
+<!--        }-->
+
+<!--        .table-container {-->
+<!--            background: white;-->
+<!--            padding: 25px;-->
+<!--            border-radius: 12px;-->
+<!--            box-shadow: 0 4px 14px rgba(0,0,0,0.08);-->
+<!--            margin-top: 40px;-->
+<!--        }-->
+
+<!--        .status-badge {-->
+<!--            padding: 6px 12px;-->
+<!--            border-radius: 20px;-->
+<!--            font-size: 0.8rem;-->
+<!--        }-->
+
+<!--        .completed {-->
+<!--            background-color: #d1e7dd;-->
+<!--            color: #0f5132;-->
+<!--        }-->
+
+<!--        .pending {-->
+<!--            background-color: #f8d7da;-->
+<!--            color: #842029;-->
+<!--        }-->
+
+<!--        h2 {-->
+<!--            font-weight: 700;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+
+<!--<body>-->
+
+<!--<div class="container">-->
+
+<!--    <h2 class="text-center mt-4">Last 7 Days Tasks</h2>-->
+
+<!--    <div class="table-container">-->
+
+<!--        <table class="table table-hover align-middle">-->
+<!--            <thead class="table-primary">-->
+<!--            <tr>-->
+<!--                <th>Date</th>-->
+<!--                <th>Title</th>-->
+<!--                <th>Description</th>-->
+<!--                <th>Status</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+
+<!--            <tbody>-->
+<!--            <tr th:each="t : ${last7daystasks}">-->
+<!--                <td th:text="${t.createdAt}"></td>-->
+<!--                <td th:text="${t.title}"></td>-->
+<!--                <td th:text="${t.description}"></td>-->
+
+<!--                <td>-->
+<!--                        <span th:classappend="${t.status == 'Completed'} ? 'status-badge completed' : 'status-badge pending'"-->
+<!--                              th:text="${t.status}">-->
+<!--                        </span>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+
+<!--    </div>-->
+
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Last 7 Days Tasks</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #eceff7, #f8f9fa);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* SIDEBAR (same as home) */
+        .sidebar {
+            height: 100vh;
+            width: 240px;
+            background: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 25px 20px;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.10);
+            border-radius: 0 20px 20px 0;
+        }
+
+        .sidebar-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #4a4e69;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .menu-btn {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #f0f2f7;
+            font-size: 16px;
+            text-align: left;
+            transition: 0.2s;
+        }
+
+        .menu-btn:hover {
+            background: #e2e6f3;
+        }
+
+        .menu-btn.active {
+            background: #6c5ce7;
+            color: white;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .heading {
+            font-size: 28px;
+            font-weight: 800;
+            color: #343a40;
+        }
+
+        /* CARD */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        /* TASK ITEM (same as your theme) */
+        .task-item {
+            background: #ffffff;
+            border-left: 6px solid #6c5ce7;
+            padding: 18px;
+            border-radius: 12px;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+            transition: 0.2s;
+        }
+
+        .task-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .task-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .task-desc {
+            font-size: 13px;
+            color: #6c757d;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .completed {
+            background: #d4edda;
+            color: #2e7d32;
+        }
+
+        .pending {
+            background: #ffe9b3;
+            color: #b47d00;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="sidebar-title">To-Do Menu</div>
+
+    <a th:href="@{/todo}">
+        <button class="menu-btn">🏠 Home</button>
+    </a>
+    <a th:href="@{/tasks/today}">
+        <button class="menu-btn">📅 Today's Tasks</button>
+    </a>
+    <a th:href="@{/allTasks}">
+        <button class="menu-btn">📌 All Tasks</button>
+    </a>
+    <a th:href="@{/tasks/last7}">
+        <button class="menu-btn active">⏱ Last 7 Days Tasks</button>
+    </a>
+    <a th:href="@{/logout}">
+        <button class="menu-btn" style="margin-top:50px;">🚪 Logout</button>
+    </a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+    <!-- PAGE HEADING -->
+    <h2 class="heading mb-4">Last 7 Days Tasks</h2>
+
+    <!-- TASK DISPLAY CARD -->
+    <div class="glass-card">
+
+        <h5 class="mb-3">Recently Added Tasks</h5>
+
+        <div th:if="${#lists.isEmpty(last7daystasks)}" class="text-center text-muted fs-5">
+            No tasks found in the last 7 days.
+        </div>
+
+        <div th:each="t : ${last7daystasks}" class="task-item">
+
+            <div class="d-flex justify-content-between">
+
+                <div>
+                    <div class="task-title" th:text="${t.title}"></div>
+                    <div class="task-desc" th:text="${t.description}"></div>
+                    <small class="text-muted" th:text="'Date: ' + ${t.createdAt}"></small>
+                </div>
+
+                <div class="text-end">
+                    <span th:classappend="${t.status == 'Completed'} ? 'completed status-badge' : 'pending status-badge'"
+                          th:text="${t.status}">
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+

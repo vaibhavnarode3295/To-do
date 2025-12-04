@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome | To-Do App</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8f9fa, #e3f2fd); /* Soft light blue + white */
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-box {
+            background: white;
+            padding: 40px;
+            width: 420px;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+        }
+
+        h1 {
+            font-weight: 700;
+            font-size: 28px;
+            color: #4a4e69;  /* Soft dark lavender */
+        }
+
+        p {
+            color: #6c757d;
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn-login {
+            background-color: #6c5ce7; /* soft purple */
+            color: white;
+            width: 100%;
+            padding: 12px;
+            font-size: 17px;
+            border-radius: 8px;
+            border: none;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-login:hover {
+            background-color: #5a4bd4;
+        }
+
+        .btn-register {
+            background-color: #81ecec; /* soft aqua */
+            color: #2d3436;
+            width: 100%;
+            padding: 12px;
+            font-size: 17px;
+            border-radius: 8px;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .btn-register:hover {
+            background-color: #74d9d9;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card-box">
+    <h1>Welcome to Your To-Do App</h1>
+    <p>Plan smart. Stay organized. Achieve goals.</p>
+
+    <a th:href="@{/login}">
+        <button class="btn-login">Login</button>
+    </a>
+
+    <a th:href="@{/register}">
+        <button class="btn-register">Register</button>
+    </a>
+</div>
+
+</body>
+</html>
+
