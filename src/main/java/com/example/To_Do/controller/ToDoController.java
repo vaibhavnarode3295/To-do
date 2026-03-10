@@ -29,7 +29,7 @@ public class ToDoController {
         model.addAttribute("user",users);
         model.addAttribute("todo",new ToDo());
         model.addAttribute("todos",list);
-        return "homepage";
+        return "index";
     }
     @PostMapping("/save")
     public String saveTask(@ModelAttribute ToDo toDo, Principal principal)
