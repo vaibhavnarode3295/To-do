@@ -3,6 +3,7 @@ package com.example.To_Do.controller;
 import com.example.To_Do.model.Users;
 import com.example.To_Do.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@Slf4j
 public class UserController {
 
     @Autowired
@@ -25,6 +27,7 @@ public class UserController {
     @GetMapping("/register")
     public String register(Model model)
     {
+        log.info("/register end point is hit");
         model.addAttribute("user",new Users());
         return "registration";
     }
@@ -32,11 +35,14 @@ public class UserController {
     @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute Users user, HttpSession session)
     {
+        log.info("registration done");
         String otp = userService.generateOtp();
+        log.info("otp generated");
         session.setAttribute("otp",otp);
         session.setAttribute("user",user);
-        System.out.println(otp);
+        log.info("otp is "+otp);
         userService.sendMail(user.getEmail(), otp);
+        log.info("email is send to the user");
         return "verify-otp";
     }
 

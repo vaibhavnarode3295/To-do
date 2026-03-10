@@ -17,6 +17,8 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private JavaMailSender javaMailSender;
+    @Autowired
+    private EmailService emailService;
     public String generateOtp()
     {
         Integer otp= (int) (Math.random()*900000) +100000;
@@ -30,14 +32,18 @@ public class UserService {
         usersRepo.save(users);
     }
 
-    public void sendMail(String toemail, String otp)
-    {
-        SimpleMailMessage message=new SimpleMailMessage();
-        message.setFrom("vaibhavnarode56@gmail.com");
-        message.setTo(toemail);
-        message.setSubject("Your OTP Verification Code");
-        message.setText("Your Otp is "+otp+"\n Do not share with anyone");
-        javaMailSender.send(message);
+//    public void sendMail(String toemail, String otp)
+//    {
+//        SimpleMailMessage message=new SimpleMailMessage();
+//        message.setFrom("vaibhavnarode56@gmail.com");
+//        message.setTo(toemail);
+//        message.setSubject("Your OTP Verification Code");
+//        message.setText("Your Otp is "+otp+"\n Do not share with anyone");
+//        javaMailSender.send(message);
+//    }
+
+    public void sendMail(String toEmail, String otp){
+        emailService.sendEmail(toEmail,"Register with OTP","Your OTP is "+otp);
     }
 
     public Users getCurrentUser(String email)
