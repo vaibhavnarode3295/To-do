@@ -37,6 +37,10 @@
         Registration successful. Please login.
     </div>
 
+    <div th:if="${param.logout}" class="alert alert-success">
+        You are Logout
+    </div>
+
     <form th:action="@{/login}" method="post">
 
         <div class="mb-3">

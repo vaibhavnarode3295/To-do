@@ -58,9 +58,8 @@ public class SecurityConfig {
                 )
                 .sessionManagement(session -> session
                         .sessionFixation(sessionFix -> sessionFix.migrateSession())
-                        .invalidSessionUrl("/login?timeout=true")
                         .maximumSessions(1)
-                        .maxSessionsPreventsLogin(false)
+                        .expiredUrl("/login?timeout=true")
                 )
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/logout")
