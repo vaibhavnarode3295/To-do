@@ -19,11 +19,11 @@ public class UserService {
     private JavaMailSender javaMailSender;
     @Autowired
     private EmailService emailService;
-    public String generateOtp()
-    {
-        Integer otp= (int) (Math.random()*900000) +100000;
-        return String.valueOf(otp);
-    }
+//    public String generateOtp()
+//    {
+//        Integer otp= (int) (Math.random()*900000) +100000;
+//        return String.valueOf(otp);
+//    }
 
     public void saveUser(Users users)
     {
@@ -42,9 +42,9 @@ public class UserService {
 //        javaMailSender.send(message);
 //    }
 
-    public void sendMail(String toEmail, String otp){
-        emailService.sendEmail(toEmail,"Register with OTP","Your OTP is "+otp);
-    }
+//    public void sendMail(String toEmail, String otp){
+//        emailService.sendEmail(toEmail,"Register with OTP","Your OTP is "+otp);
+//    }
 
     public Users getCurrentUser(String email)
     {
